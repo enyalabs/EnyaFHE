@@ -1,0 +1,54 @@
+{
+  "name": "enyafhe",
+  "version": "1.0.2",
+  "description": "Fully Homomorphic Encryption",
+  "main": "index.js",
+  "private": false,
+  "deprecated": false,
+  "scripts": {
+    "start": "npm install",
+    "test": "node ./__test__/__test__.js",
+    "uglify": "grunt uglify",
+    "eslint": "grunt eslint"
+  },
+  "author": {
+    "name": "enya.ai",
+    "email": "contact@enya.ai",
+    "url": "https://wwww.enya.ai"
+  },
+  "bugs": {
+    "url": "https://github.com/enyalabs/EnyaFHE/issues"
+  },
+  "homepage": "https://github.com/enyalabs/EnyaFHE#readme",
+  "license": "MIT",
+  "dependencies": {
+    "bignumber.js": "^9.0.0",
+    "next-frame": "^0.2.3",
+    "node-fetch": "^2.6.0",
+    "random": "^2.1.1"
+  },
+  "devDependencies": {
+    "eslint-json": "^2.0.0",
+    "eslint-tap": "^2.0.1",
+    "grunt": "^1.0.4",
+    "grunt-contrib-uglify": "^4.0.1",
+    "grunt-contrib-uglify-es": "github:gruntjs/grunt-contrib-uglify#harmony",
+    "grunt-contrib-watch": "^0.5.3",
+    "grunt-eslint": "^22.0.0"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [
+    "FHE",
+    "Fully Homomorphic Encryption",
+    "Homomorphic Encrytion",
+    "encryption",
+    "homomorphic",
+    "secure",
+    "js",
+    "private",
+    "Enya",
+    "Enya.ai"
+  ]
+}
