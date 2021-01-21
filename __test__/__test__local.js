@@ -5,7 +5,7 @@ var Decrypt = require("../dist/encryption/Decrypt");
 var EvalAdd = require("../core/eval/EvalAdd")
 var EvalSub = require("../core/eval/EvalSub")
 var EvalMulti = require("../core/eval/EvalMulti")
-var FHEMath = require("../core/math/FHEMath")
+var FHEMath = require("../core/math/FHEMath");
 function Test() {
 
     /* Configure */
@@ -33,7 +33,7 @@ function Test() {
 
     /* Pack the weight */
     console.time("EnyaFHE: Encrypt a number");
-    var weights = [170];
+    var weights = [17.5];
     var ptxt = EnyaFHE.PackVector(weights);
 
     /* Encrypt the plaintext */
@@ -50,7 +50,7 @@ function Test() {
         EnyaFHE.ReadCiphertext(ciphertext)
     );
     console.timeEnd("EnyaFHE: Decrypt");
-    
+    console.log(text[0])
     if (text[0] === weights) {
         throw new Error("EnyaFHE: Test1 failed!");
     } else {
@@ -136,7 +136,7 @@ function Test() {
         EnyaFHE.ReadCiphertext(ciphertext)
     );
     console.timeEnd("EnyaFHE: Decrypt");
-    
+
     if (text.slice(0,5) == [200, 400, 600, 800, 1000]) {
         throw new Error("EnyaFHE: Test3 failed!");
     } else {
@@ -191,7 +191,7 @@ function Test() {
         EnyaFHE.ReadCiphertext(ciphertext)
     );
     console.timeEnd("EnyaFHE: Decrypt");
-    
+
     if (text.slice(0,5) == [0, 0, 0, 0, 0]) {
         throw new Error("EnyaFHE: Test4 failed!");
     } else {

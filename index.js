@@ -3,6 +3,7 @@ var Encrypt = require("./dist/encryption/Encrypt");
 var Decrypt = require("./dist/encryption/Decrypt");
 var APICall = require("./dist/requests/API");
 var FHEMath = require("./dist/math/FHEMath");
+var EvalSub = require("./dist/eval/EvalSub");
 
 class EnyaFHE {
     /**
@@ -175,6 +176,19 @@ class EnyaFHE {
      */
     EncryptVector(plaintext, publickey) {
         return Encrypt.VectorEncrypt(plaintext, publickey);
+    }
+    /**
+     *
+     * Minus the ciphertext.
+     *
+     * @param {[bignum(),...]} plaintext
+     * @param {[bignum(),...]} p1 publickey_part1
+     * @param {[bignum(),...]} p2 publickey_part2
+     *
+     * @returns {[bignum(),...]}
+     */
+    EncryptSub(ciphertext1, ciphertext2) {
+        return EvalSub.EvalSub(ciphertext1, ciphertext2);
     }
     /**
      *

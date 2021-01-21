@@ -23,11 +23,13 @@ module.exports = function(grunt) {
                             "core/math/*.js",
                             "core/src/*.js",
                             "core/encryption/*.js",
+                            "core/eval/*.js",
                             "core/requests/*.js",
                             "!core/math/*.min.js",
                             "!core/src/*.min.js",
                             "!core/requests/*.min.js",
-                            "!core/encryption/*.min.js"
+                            "!core/encryption/*.min.js",
+                            "!core/eval/*.min.js",
                         ],
                         dest: "dist",
                         cwd: ".",
@@ -39,7 +41,7 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: ["core/math/*.js", "core/src/*.js", "core/encryption/*.js", "core/requests/*.js"],
+            files: ["core/math/*.js", "core/src/*.js", "core/encryption/*.js", "core/requests/*.js", "core/eval/*.js"],
             tasks: ["uglify"]
         }
     });
