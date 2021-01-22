@@ -16,11 +16,11 @@ exports.EvalAdd = function (ciphertext1, ciphertext2) {
         var temp = new Array(ciphertext1[0].length);
         for (var j = 0; j < ciphertext1[0].length; j++) {
             var temp_val = ciphertext1[i][j].plus(ciphertext2[i][j]);
-            console.log({module: src.modulus[i]})
             if (temp_val.gt(src.modulus[i])) {
-                console.log({oldnumber: temp_val})
-                temp[j] = temp_val.minus(src.modulus[i]);
-                console.log({newnumber: temp[j]})
+                while (temp_val.gt(src.modulus[i])) {
+                    temp_val = temp_val.minus(src.modulus[i]);
+                }
+                temp[j] = temp_val;
             } else {
                 temp[j] = temp_val;
             }

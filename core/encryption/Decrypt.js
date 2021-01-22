@@ -166,6 +166,7 @@ class Decrypt {
                     .plus(bignum("1"))
             );
         }
+
         /* Unpack the decrypted vector */
         var [rootOfUnityTable, preconTable] = this.Params();
         var Input = CRT.ModMulPrecon(
@@ -174,21 +175,29 @@ class Decrypt {
             src.plaintextModulus,
             preconTable
         );
+
         var Output = CRT.NTTForward(
             Input,
             rootOfUnityTable,
             preconTable,
             src.plaintextModulus
         );
+        
         /* Rearrange */
         var res = new Array(src.cycleorder / 2);
         var  m_fromCRT = Encrypt.Params()[1];
         for (i = 0; i < src.cycleorder / 2; i++) {
             res[i] = Output[m_fromCRT[i]];
         }
+
         /* Transfer result to integer */
+        const halfModulus = src.plaintextModulus.dividedBy(bignum("2"));
         for (i = 0; i < Output.length; i++) {
-            res[i] = res[i].toNumber();
+            if (res[i].gt(halfModulus)) {
+                res[i] = res[i].minus(src.plaintextModulus).toNumber();
+            } else {
+                res[i] = res[i].toNumber();
+            }
         }
         return res;
     }
