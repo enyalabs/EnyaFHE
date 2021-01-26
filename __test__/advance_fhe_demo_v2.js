@@ -1,3 +1,5 @@
+/*not checked JTL*/
+
 /* import main js */
 var EnyaFHE = require("../index");
 

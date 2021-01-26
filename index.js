@@ -384,7 +384,7 @@ class EnyaFHE {
         );
         /* Generate the random name */
         var string_pcr = this.RandomPCR();
-        console.log("EnyaFHE: Random PCR:", string_pcr);
+        console.log("EnyaFHE: Unique compute ID", string_pcr);
         /* Send the payload to the server */
         const senddata = await this.SendData(
             { pcr: string_pcr, data: jsonpayload }
@@ -408,7 +408,7 @@ class EnyaFHE {
             count = count + 1;
         }
         if (status == true) {
-            console.log("EnyaFHE: The calculation was finished.");
+            console.log("EnyaFHE: The calculation has finished.");
             console.log("EnyaFHE: Starting to retrieve encrypted result.");
         } else {
             return { status_code: 204 , error: "EnyaFHE: Still computing..." };

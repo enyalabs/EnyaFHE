@@ -1,3 +1,5 @@
+/*not checked JTL*/
+
 var EnyaFHE = require("../index");
 var bignum = require("bignumber.js");
 var Decrypt = require("../dist/encryption/Decrypt");

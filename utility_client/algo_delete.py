@@ -5,7 +5,7 @@ import sys
 
 def delete_algorithm(secret_token, algo_id):
 
-    #HARDCODE THIS TO PRODUCTION ENDPOINT
+    #HARDCODED TO PRODUCTION ENDPOINT
     url = 'https://api-fhe.enya.ai'
 
     CRED, CBLUE, CEND = '\033[91m', '\33[34m', '\033[0m'
@@ -19,7 +19,13 @@ def delete_algorithm(secret_token, algo_id):
     if re.status_code == 404:
         print(CRED + """
 ==================== ERROR ====================
-{}
+ENDPOINT UP BUT SYNTAX OR OTHER ERROR
+===============================================
+        """.format(re.text) + CEND)
+    elif re.status_code == 401:
+        print(CRED + """
+==================== ERROR ====================
+UNAUTHORIZED
 ===============================================
         """.format(re.text) + CEND)
     else:
