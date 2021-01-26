@@ -17,12 +17,12 @@ async function demo(){
 
     /* Generate multi key */
     var multikey = EnyaFHE.MultiKeyGen(privatekey);
-    console.log("Generated multiple key.")
+    console.log("Generated multiplication key.")
 
     /* Generate rotation key */
     var rotakey = EnyaFHE.RotaKeyGen(privatekey);
     console.log("Generated rotation key.")
-    console.log("Finished key generations!")
+    console.log("Finished key generation!")
 
     /* Pack the weight */
     var plaintext = EnyaFHE.PackVector([170, 10, 20, 30, 0, 0, 0, 0]);
@@ -40,7 +40,7 @@ async function demo(){
 
     /* Random String */
     var string_pcr = EnyaFHE.RandomPCR();
-    console.log("Random PCR: ", string_pcr)
+    console.log("Random PCR:", string_pcr)
 
     /* Send the payload to the server */
     var senddata = await EnyaFHE.SendData({ pcr: string_pcr, data: jsonpayload })
