@@ -303,7 +303,7 @@ class EnyaFHE {
      * @param {String} token
      */
     async GetResult(json_table) {
-        /* Token and AlgorithnName checking */
+        /* Token and AlgorithmName checking */
         if (this.token == undefined) {
             throw new Error("EnyaFHE: Token does not exist!");
         }
@@ -384,7 +384,7 @@ class EnyaFHE {
         );
         /* Generate the random name */
         var string_pcr = this.RandomPCR();
-        console.log("EnyaFHE: Random PCR -- ", string_pcr);
+        console.log("EnyaFHE: Random PCR:", string_pcr);
         /* Send the payload to the server */
         const senddata = await this.SendData(
             { pcr: string_pcr, data: jsonpayload }
@@ -409,14 +409,14 @@ class EnyaFHE {
         }
         if (status == true) {
             console.log("EnyaFHE: The calculation was finished.");
-            console.log("EnyaFHE: Start to retrieve encrypted result.");
+            console.log("EnyaFHE: Starting to retrieve encrypted result.");
         } else {
-            return { status_code: 204 , error: "EnyaFHE: Still computing the result." };
+            return { status_code: 204 , error: "EnyaFHE: Still computing..." };
         }
         /* Retrieve the calculation result */
         const getresult = await this.GetResult({ pcr: string_pcr });
         const cipher_result = await getresult.json();
-        console.log("EnyaFHE: Start to decrypt the ciphertext.");
+        console.log("EnyaFHE: Starting to decrypt the ciphertext.");
         ciphertext = this.ReadCiphertext(cipher_result.ciphertext);
         var text = this.DecryptVector(ciphertext);
         return { status_code: 200, secure_result: text[0] };
