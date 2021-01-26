@@ -1,8 +1,6 @@
 /* import main js */
 var EnyaFHE = require("../index");
 
-/* What are the weights of the sample algo? */
-
 /* Configure */
 EnyaFHE.Configure({
     CLIENT_TOKEN: "f7edB8a8A4D7dff85d2CB7E5",

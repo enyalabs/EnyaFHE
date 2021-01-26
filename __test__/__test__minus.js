@@ -2,6 +2,8 @@
 var EnyaFHE = require("../index");
 var bignum = require("bignumber.js");
 
+/*not checked JTL*/
+
 function Test() {
 
   console.time("EnyaFHE: key generation");

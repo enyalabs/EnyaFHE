@@ -11,12 +11,12 @@ function Test() {
         algo_name: "sample_algo"
     })
 
-    console.log("EnyaFHE: ------- Test1 ----------");
+    console.log("\nEnyaFHE: ------- Test1 ----------");
     console.log("EnyaFHE: -- EnyaFHE Encryption --")
     console.log("EnyaFHE: ----- Local Test -------")
     
     /* Generate private key */
-    console.time("EnyaFHE: key generation");
+    console.time("EnyaFHE: Key generation");
     var privatekey = EnyaFHE.PrivateKeyGen();
     
     /* Generate public key */
@@ -27,10 +27,10 @@ function Test() {
 
     /* Generate rotation key */
     var rotakey = EnyaFHE.RotaKeyGen();
-    console.timeEnd("EnyaFHE: key generation");
+    console.timeEnd("EnyaFHE: Key generation");
 
     /* Pack the weight */
-    console.time("EnyaFHE: Encrypt a number");
+    console.time("EnyaFHE: Encrypt the number 170");
     var weights = [170];
     var ptxt = EnyaFHE.PackVector(weights);
 
@@ -39,7 +39,7 @@ function Test() {
         ptxt,
         publickey
     );
-    console.timeEnd("EnyaFHE: Encrypt a number");
+    console.timeEnd("EnyaFHE: Encrypt the number 170");
     
     /* Decrypt the ciphertext */
     console.time("EnyaFHE: Decrypting");
@@ -48,23 +48,23 @@ function Test() {
         EnyaFHE.ReadCiphertext(ciphertext)
     );
     console.timeEnd("EnyaFHE: Decrypting");
-    
-    if (text[0] === weights) {
-        throw new Error("EnyaFHE: Test1 failed!");
-    } else {
+
+    if (text[0] === weights[0]) {
         console.log("EnyaFHE: Passed Test1");
+    } else {
+        throw new Error("EnyaFHE: Test1 failed!");
     }
 
-    console.log("EnyaFHE: ------- Test2 ----------");
+    console.log("\nEnyaFHE: ------- Test2 ----------");
     console.log("EnyaFHE: -- EnyaFHE Decryption --")
     console.log("EnyaFHE: ----- Local Test -------")
     
     /* Load demo data */
     var demo = require("./demo");
-    console.time("EnyaFHE: Loading demo data");
+    console.time("EnyaFHE: Loading demo data and keys");
     var ciphertext = EnyaFHE.ReadCiphertext(demo.ciphertext);
     
-    /* Read privateky */
+    /* Read privatekey */
     var demo_privatekey = [];
     for (var i = 0; i < 3; i++) {
         var temp_privatekey_bignum = [];
@@ -73,17 +73,17 @@ function Test() {
         }
         demo_privatekey.push(temp_privatekey_bignum);
     }
-    console.timeEnd("EnyaFHE: Loading demo data");
+    console.timeEnd("EnyaFHE: Loading demo data and keys");
     
     /* Decrypt demo data*/
     console.time("EnyaFHE: Decrypting");
     text = Decrypt.DecryptVector(ciphertext, demo_privatekey);
     console.timeEnd("EnyaFHE: Decrypting");
-    
-    if (text[0] === [131785]) {
-        throw new Error("EnyaFHE: Test2 failed!");
-    } else {
+
+    if (text[0] === 131785) {
         console.log("EnyaFHE: Passed Test2");
+    } else {
+        throw new Error("EnyaFHE: Test2 failed!");
     }
 
     /*
@@ -91,12 +91,12 @@ function Test() {
     The whole process of FHE compuation.
     It allows you to add indicators during the calculation.
     */
-    console.log("EnyaFHE: ------- Test6 --------");
-    console.log("EnyaFHE: -- EnyaFHE API Test --")
-    console.log("EnyaFHE: ----- Online Test ----")
+    console.log("\nEnyaFHE: -------- Test3 --------");
+    console.log("EnyaFHE: --- EnyaFHE API Test --")
+    console.log("EnyaFHE: ------ Online Test ----")
     
     /* Generate private key */
-    console.time("EnyaFHE: key generation");
+    console.time("EnyaFHE: Key generation");
     var privatekey = EnyaFHE.PrivateKeyGen();
 
     /* Generate public key */
@@ -107,10 +107,10 @@ function Test() {
 
     /* Generate rotation key */
     var rotakey = EnyaFHE.RotaKeyGen();
-    console.timeEnd("EnyaFHE: key generation");
+    console.timeEnd("EnyaFHE: Key generation");
     /* Pack the weight */
 
-    console.time("EnyaFHE: Encrypt a number");
+    console.time("EnyaFHE: Encrypting vector");
     var weights = [170, 10, 20, 30, 0, 0, 0, 0];
     var ptxt = EnyaFHE.PackVector(weights);
 
@@ -119,8 +119,7 @@ function Test() {
         ptxt,
         publickey
     );
-
-    console.timeEnd("EnyaFHE: Encrypt a number");
+    console.timeEnd("EnyaFHE: Encrypting vector");
     
     var jsonpayload = EnyaFHE.JSONPayload(
         publickey,
@@ -130,7 +129,7 @@ function Test() {
     );
 
     var string_pcr = EnyaFHE.RandomPCR();
-    console.log("EnyaFHE: Random PCR (= unique compute ID): ", string_pcr)
+    console.log("EnyaFHE: Unique compute ID", string_pcr)
 
     EnyaFHE.SendData({ pcr: string_pcr, data: jsonpayload })
         .then(function(response) {
@@ -146,7 +145,7 @@ function Test() {
                     })
                     .then(function(json) {
                         if (json.API_result_ready == true) {
-                            console.log("EnyaFHE: The calculation was finished.");
+                            console.log("EnyaFHE: The calculation has finished.");
                             console.log("EnyaFHE: Starting to retrieve encrypted result.");
                             EnyaFHE.GetResult({pcr: string_pcr})
                             .then(function(response){
@@ -157,26 +156,25 @@ function Test() {
                                 var ciphertext = EnyaFHE.ReadCiphertext(json.ciphertext);
                                 var text = EnyaFHE.DecryptVector(ciphertext)
                                 if (text[0] != 3020850) {
-                                    throw new Error("EnyaFHE: Failed Test6")
+                                    throw new Error("EnyaFHE: Failed Test3")
                                 } else {
-                                    console.log("EnyaFHE: Passed Test6")
-                                    console.log("\n")
+                                    console.log("EnyaFHE: Passed Test3")
                                 }
 
                                 /* 
-                                Test7
-                                It uses the compact EnyaFHE.FHE() function.
+                                Test4
+                                Uses the compact EnyaFHE.FHE() function.
                                 */
                                
-                               console.log("EnyaFHE: ------- Test7 ----------")
+                               console.log("\nEnyaFHE: ------- Test4 ----------")
                                console.log("EnyaFHE: -- EnyaFHE.FHE() Test --")
                                console.log("EnyaFHE: ----- Online Test ------")
                                EnyaFHE.FHE([170, 10, 20, 30, 0, 0, 0, 0])
                                 .then(function(res){
                                     if ( res.status_code == 200 ){
-                                        console.log("EnyaFHE: passed Test7")
+                                        console.log("EnyaFHE: Passed Test4\n")
                                     } else {
-                                        throw new Error("EnyaFHE: Faile Test7")
+                                        throw new Error("EnyaFHE: Failed Test4\n")
                                     }
                                 })
                                 

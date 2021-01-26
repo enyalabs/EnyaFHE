@@ -5,7 +5,7 @@ import argparse
 
 def list_algorithms(secret_token):
     
-    #HARDCODE THIS TO PRODUCTION ENDPOINT
+    #HARDCODED THIS TO PRODUCTION ENDPOINT
     url = 'https://api-fhe.enya.ai'
 
     # string formatting
@@ -19,14 +19,23 @@ def list_algorithms(secret_token):
     if re.status_code == 404:
         print(CRED + """
 ==================== ERROR ====================
-{}
+ENDPOINT UP BUT SYNTAX OR OTHER ERROR
+===============================================
+        """.format(re.text) + CEND)
+    elif re.status_code == 401:
+        print(CRED + """
+==================== ERROR ====================
+UNAUTHORIZED
 ===============================================
         """.format(re.text) + CEND)
     else:
         print(CBLUE + "\n{:<22} | {:<9} | {:<9} | {:<15}".format("********* id *********", "algo_type", "algo_name", "coefficients") + CEND)
         print(CBLUE + "-----------------------------------------------------------------------" + CEND)
-        for row in re.json():
-            print("{:<22} | {:<9} | {:<9} | {:<15}".format(row['id'], row['algo_type'], row['algo_name'], row['coefficients']))
+        if(len(re.json()) > 0):
+            for row in re.json():
+                print("{:<22} | {:<9} | {:<9} | {:<15}".format(row['id'], row['algo_type'], row['algo_name'], row['coefficients']))
+        else:
+            print(CRED + "Zero algorithms configured" + CEND)
         print(CBLUE + "-----------------------------------------------------------------------" + CEND + '\n')
 
 def parse_args():

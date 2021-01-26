@@ -41,7 +41,13 @@ Please shorten your name to fewer than 20 characters.
     if re.status_code == 404:
         print(CRED + """
 ==================== ERROR ====================
-{}
+ENDPOINT UP BUT SYNTAX OR OTHER ERROR
+===============================================
+        """.format(re.text) + CEND)
+    elif re.status_code == 401:
+        print(CRED + """
+==================== ERROR ====================
+UNAUTHORIZED
 ===============================================
         """.format(re.text) + CEND)
     else:
