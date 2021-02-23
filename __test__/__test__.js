@@ -1,7 +1,7 @@
-/* For test purpose */
+/* For testing */
 var EnyaFHE = require("../index");
 var bignum = require("bignumber.js");
-var Decrypt = require("../dist/encryption/Decrypt");
+var Decrypt = require("../core/encryption/Decrypt");
 
 function Test() {
 
@@ -87,7 +87,7 @@ function Test() {
     }
 
     /*
-    Test6
+    Test3
     The whole process of FHE compuation.
     It allows you to add indicators during the calculation.
     */
@@ -108,8 +108,8 @@ function Test() {
     /* Generate rotation key */
     var rotakey = EnyaFHE.RotaKeyGen();
     console.timeEnd("EnyaFHE: Key generation");
+    
     /* Pack the weight */
-
     console.time("EnyaFHE: Encrypting vector");
     var weights = [170, 10, 20, 30, 0, 0, 0, 0];
     var ptxt = EnyaFHE.PackVector(weights);

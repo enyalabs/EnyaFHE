@@ -8,9 +8,9 @@ def define_algorithm(secret_token, algo_name, algo_type, coefficient):
     
     import re
 
-    #HARDCODE THIS TO PRODUCTION ENDPOINT
     url = 'https://api-fhe.enya.ai'
 
+    # table string formatting
     CRED, CBLUE, CEND = '\033[91m', '\33[34m', '\033[0m'
 
     #check name here - type string and max_length < something 
@@ -21,7 +21,6 @@ Please shorten your name to fewer than 20 characters.
         """ + CEND
 
     #check coefficient entry here - is is an array with numbers?
-    #needs to be improved for missing, etc.
     regex = "\s*\[(\s*[+-]?([0-9]*[.])?[0-9]+[\s]*[,]?[\s]?)+\]\s*"
     
     pattern = re.compile(regex)

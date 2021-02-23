@@ -4,11 +4,10 @@ import sys
 import argparse
 
 def list_algorithms(secret_token):
-    
-    #HARDCODED THIS TO PRODUCTION ENDPOINT
+
     url = 'https://api-fhe.enya.ai'
 
-    # string formatting
+    # table string formatting
     CRED, CBLUE, CEND = '\033[91m', '\33[34m', '\033[0m'
 
     re = requests.get(

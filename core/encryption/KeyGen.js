@@ -1,10 +1,10 @@
 var bignum = require("bignumber.js");
-var nextFrame = require("next-frame");
 
 var FHEMath = require("../math/FHEMath");
 var src = require("../src/src");
 var CRT = require("../math/CRT");
 
+var nextFrame = require("next-frame");
 bignum.config({ ROUNDING_MODE: 1 });
 
 class KeyGen {

@@ -1,10 +1,10 @@
 var bignum = require("bignumber.js");
 
+var FHEMath = require("../math/FHEMath");
 var src = require("../src/src");
 var CRT = require("../math/CRT");
-var FHEMath = require("../math/FHEMath");
-var Encrypt = require("./Encrypt");
 
+var Encrypt = require("./Encrypt");
 bignum.config({ ROUNDING_MODE: 1 });
 
 class Decrypt {
@@ -103,16 +103,20 @@ class Decrypt {
      * @param {[bignum(),...]} c1
      * @param {[bignum(),...]} privatekey
      *
-     * @returns {Array}
+     * @returns {Array of Integers}
      */
     DecryptVector(ciphertext, privatekey) {
+
         privatekey = FHEMath.vectortoBigNumber(privatekey);
+        
         var c0 = new Array(src.modulus.length);
         var c1 = new Array(src.modulus.length);
+
         for (var i = 0; i < src.modulus.length; i++) {
             c0[i] = ciphertext[i];
             c1[i] = ciphertext[i + 3];
         }
+        
         /* decrypt the ciphertext */
         var plaintext = [];
         for (i = 0; i < src.modulus.length; i++) {
@@ -137,13 +141,15 @@ class Decrypt {
 
         var coeff = [];
         for (i = 0; i < src.cycleorder / 2; i++) {
+
             var IntSum = bignum("0");
             var FloatSum = bignum("0");
+            
             for (j = 0; j < src.modulus.length; j++) {
                 var x = plaintext[j][i];
                 /* 
-                bignum library does not support float calcualtion, 
-                so I enlarge our number by 1000000000.
+                bignum does not support floats, obviously, 
+                we multiply the float by 1000000000, creating an int.
                 */
                 IntSum = IntSum.plus(
                     CRT.ModMulPrecon(
@@ -169,6 +175,7 @@ class Decrypt {
 
         /* Unpack the decrypted vector */
         var [rootOfUnityTable, preconTable] = this.Params();
+
         var Input = CRT.ModMulPrecon(
             coeff,
             rootOfUnityTable,
@@ -185,13 +192,16 @@ class Decrypt {
         
         /* Rearrange */
         var res = new Array(src.cycleorder / 2);
+
         var  m_fromCRT = Encrypt.Params()[1];
+        
         for (i = 0; i < src.cycleorder / 2; i++) {
             res[i] = Output[m_fromCRT[i]];
         }
 
         /* Transfer result to integer */
         const halfModulus = src.plaintextModulus.dividedBy(bignum("2"));
+
         for (i = 0; i < Output.length; i++) {
             if (res[i].gt(halfModulus)) {
                 res[i] = res[i].minus(src.plaintextModulus).toNumber();
@@ -199,6 +209,7 @@ class Decrypt {
                 res[i] = res[i].toNumber();
             }
         }
+
         return res;
     }
 }

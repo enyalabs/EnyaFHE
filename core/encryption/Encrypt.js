@@ -2,14 +2,14 @@ var bignum = require("bignumber.js");
 
 var FHEMath = require("../math/FHEMath");
 var src = require("../src/src");
-var KeyGen = require("./KeyGen");
 var CRT = require("../math/CRT");
 
+var KeyGen = require("./KeyGen");
 bignum.config({ ROUNDING_MODE: 1 });
 
 class Encrypt {
     constructor(){
-        this.m_initRoot = 13537164; // hardcode. TODO
+        this.m_initRoot = 13537164;
     }
     /**
      *
@@ -42,16 +42,20 @@ class Encrypt {
      * @returns {[String,..]}
      */
     VectorPacked(vector) {
+        
         var m_toCRT = this.Params()[0];
+
         while (vector.length < src.cycleorder / 2) {
             vector.push(0);
         }
-        var premutation = new Array(src.cycleorder / 2).fill(0);
+
+        var permutation = new Array(src.cycleorder / 2).fill(0);
 
         for (var i = 0; i < src.cycleorder / 2; i++) {
-            premutation[i] = bignum(vector[m_toCRT[i]].toString());
+            permutation[i] = bignum(vector[m_toCRT[i]].toString());
         }
-        var res = this.SpecialCRT(premutation);
+
+        var res = this.SpecialCRT(permutation);
 
         return FHEMath.vectortoString(res);
     }
@@ -70,7 +74,7 @@ class Encrypt {
             FHEMath.ModInverse(
                 bignum(this.m_initRoot.toString()),
                 src.plaintextModulus
-            ), //TODO
+            ),
             src.plaintextModulus // modulus
         ); //8630410687 --> ModInverse
 
@@ -139,9 +143,7 @@ class Encrypt {
             var c1_vector = [];
 
             for (var j = 0; j < src.cycleorder / 2; j++) {
-                /* generate c0 
-            c0 = p0 * u + e1 + ptxt * deltaTable
-            */
+                /* generate c0, where c0 = p0 * u + e1 + ptxt * deltaTable */
                 var temp_c0 = p0[i][j]
                     .times(u[j])
                     .mod(src.modulus[i])
@@ -157,9 +159,7 @@ class Encrypt {
                 }
                 c0_vector.push(temp_c0);
 
-                /* generate c1 
-            c1 = p1 * u + e2
-            */
+                /* generate c1, where c1 = p1 * u + e2 */
                 var temp_c1 = p1[i][j]
                     .times(u[j])
                     .mod(src.modulus[i])

@@ -134,7 +134,7 @@ var src = require("../src/src");
     }
     /**
      * 
-     * Deal with the negative values 
+     * Deal with negative values 
      * 
      * @param {[bignum(),bignum(),bignum()]} modulus 
      * @returns {[bignum(),...]}
@@ -157,7 +157,7 @@ var src = require("../src/src");
     }
     /**
      * 
-     * Deal with the negative values 
+     * Deal with negative values 
      * 
      * @param {[bignum(),bignum(),bignum()]} modulus 
      * @returns {[bignum(),...]}

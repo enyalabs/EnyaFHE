@@ -1,8 +1,8 @@
 # Configure your own algorithm
 
-**Please replace all instances of '5b745EDBb3f55ab7A12F9220' with your master token to configure**
+## Getting started
 
-The example master token will not work - functions will return:
+Please replace all instances of '5b745EDBb3f55ab7A12F9220' with your master token to configure. If you don't, the examples will not work - functions will return, for example:
 
 ```
 $ python3 ./utility_client/algo_list.py -s '5b745EDBb3f55ab7A12F9220'
@@ -13,7 +13,7 @@ UNAUTHORIZED
 
 ```
 
-* List your algorithm(s)
+## List your algorithm(s)
 
 ```bash
 python3 algo_list.py -s [secret token]
@@ -23,7 +23,7 @@ for example,
 python3 algo_list.py -s '5b745EDBb3f55ab7A12F9220'
 ```
 
-If your token is correct, and you have configured algoerithms, you will see an output like
+If your token is correct, and you have configured algorithms, you will see an output like
 ```
 $ python3 algo_list.py -s '5b745EDBb3f55ab7A12F9220'
 
@@ -34,7 +34,7 @@ $ python3 algo_list.py -s '5b745EDBb3f55ab7A12F9220'
 -----------------------------------------------------------------------
 ```
 
-* Add your new algorithm. There are currently two algorithm types, 'smc' and 'fhe'.
+## Add your new algorithm. There are currently two algorithm types, 'smc' and 'fhe'.
 
 ```bash
 python3 algo_add.py -s [secret token] -n [name] -t [type] -c [coefficients]
@@ -46,7 +46,7 @@ python3 algo_add.py -s '5b745EDBb3f55ab7A12F9220' -n 'test_8' -t 'fhe' -c '[0,1,
 
 The format of coefficients should follow `[int, int, int, int, int, ...]`.
 
-* Delete your algorithm
+## Delete your algorithm
 
 ```bash
 python3 algo_delete.py -s [secret token] -i [algo_id]

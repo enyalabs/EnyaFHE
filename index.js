@@ -1,4 +1,4 @@
-var KeyGen = require("./dist/encryption/KeyGen");
+var KeyGen  = require("./dist/encryption/KeyGen");
 var Encrypt = require("./dist/encryption/Encrypt");
 var Decrypt = require("./dist/encryption/Decrypt");
 var APICall = require("./dist/requests/API");
@@ -45,7 +45,7 @@ class EnyaFHE {
     }
     /**
      *
-     * Generate a private key.
+     * Generate a private key
      *
      * @returns {[bignum(),...]}
      */
@@ -92,7 +92,7 @@ class EnyaFHE {
      * rotation key
      */
     RotaKeyGen(privatekey = this.privatekey) {
-        if (privatekey == undefined) {
+        if (typeof privatekey === 'undefined') {
             throw new Error("EnyaFHE: No private key found.");
         }
         return KeyGen.RotaKey(privatekey);
@@ -112,13 +112,13 @@ class EnyaFHE {
      *
      * RN version
      * Generate a public key. It returns two parts
-     * of the publick key.
+     * of the public key.
      *
      * @returns {[[bignum(),...],[bignum(),...],...]}
      * private key
      */
     async PublicKeyGenRN(privatekey = this.privatekey) {
-        if (privatekey == undefined) {
+        if (typeof privatekey === 'undefined') {
             throw new Error("EnyaFHE: No private key found.");
         }
         return await KeyGen.PublicKeyRN(privatekey);
@@ -133,7 +133,7 @@ class EnyaFHE {
      * multiplication key
      */
     async MultiKeyGenRN(privatekey = this.privatekey) {
-        if (privatekey == undefined) {
+        if (typeof privatekey === 'undefined') {
             throw new Error("EnyaFHE: No private key found.");
         }
         return await KeyGen.MultKeyRN(privatekey);
@@ -213,7 +213,7 @@ class EnyaFHE {
      * @returns {Array} result
      */
     DecryptVector(ciphertext, privatekey = this.privatekey) {
-        if (privatekey == undefined) {
+        if (typeof privatekey === 'undefined') {
             throw new Error("EnyaFHE: No private key found.");
         }
         return Decrypt.DecryptVector(ciphertext, privatekey);
@@ -254,7 +254,7 @@ class EnyaFHE {
     /**
      *
      * Generate random pcr name
-     *
+     * PCR stands for 'private compute request'
      */
     RandomPCR() {
         return APICall.RandomPCR();
@@ -367,7 +367,7 @@ class EnyaFHE {
             /* Generate a rotation key */
             rotakey = this.RotaKeyGen(privatekey);
         }
-        /* Packed the weight */
+        /* Pack the weights */
         var ptxt = this.PackVector(weights);
         /* Encrypt the plaintext */
         var ciphertext = this.EncryptVector(

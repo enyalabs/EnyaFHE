@@ -5,9 +5,9 @@ import sys
 
 def delete_algorithm(secret_token, algo_id):
 
-    #HARDCODED TO PRODUCTION ENDPOINT
     url = 'https://api-fhe.enya.ai'
 
+    # table string formatting
     CRED, CBLUE, CEND = '\033[91m', '\33[34m', '\033[0m'
 
     re = requests.delete(

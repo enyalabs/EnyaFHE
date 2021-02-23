@@ -2,7 +2,7 @@
 
 var EnyaFHE = require("../index");
 var bignum = require("bignumber.js");
-var Decrypt = require("../dist/encryption/Decrypt");
+var Decrypt = require("../core/encryption/Decrypt");
 
 /* Generate private key */
 console.time("EnyaFHE: key generation");
@@ -18,17 +18,20 @@ var multikey = EnyaFHE.MultiKeyGen();
 var rotakey = EnyaFHE.RotaKeyGen();
 console.timeEnd("EnyaFHE: key generation");
 
-/* Specify a number with a decimal point, in this case, 17.5 */
-console.time("EnyaFHE: Encrypt a number");
-var weights = [17.5];
+/* Specify a number with a decimal point, in this case, 17.1 */
+console.time("EnyaFHE: Encrypt a float");
+var weights = ['170.1'];
 var ptxt = EnyaFHE.PackVector(weights);
+
+console.log("EnyaFHE: cleartext:", ptxt);
 
 /* Encrypt the plaintext */
 var ciphertext = EnyaFHE.EncryptVector(
   ptxt,
   publickey
 );
-console.timeEnd("EnyaFHE: Encrypt a number");
+
+console.timeEnd("EnyaFHE: Encrypt a float");
 
 /* Decrypt the ciphertext */
 console.time("EnyaFHE: Decrypt");
@@ -47,3 +50,7 @@ console.log(ciphertext_bignumber);
 // DecryptVector()
 const text2 = EnyaFHE.DecryptVector(ciphertext_bignumber);
 console.log(text2);
+
+
+
+

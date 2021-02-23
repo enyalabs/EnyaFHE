@@ -1,8 +1,7 @@
-/* For test purpose */
 var EnyaFHE = require("../index");
 var bignum = require("bignumber.js");
-
-/*not checked JTL*/
+var EvalSub = require("../core/eval/EvalSub")
+var EvalAdd = require("../core/eval/EvalAdd")
 
 function Test() {
 
@@ -41,19 +40,27 @@ function Test() {
   console.timeEnd("EnyaFHE: Encrypting two vectors");
 
   /* Subtract the two encrypted vectors */
-  console.time("EnyaFHE: Running Calculation: Subtracting the two encrypted vectors");
-  var ciphertext = EnyaFHE.EncryptSub(ciphertext1, ciphertext2)
-  console.timeEnd("EnyaFHE: Running Calculation: Subtracting the two encrypted vectors");
+  console.time("EnyaFHE: Running Calculation: Adding and Subtracting the two encrypted vectors");
+
+  var ciphertextSub = EvalSub.EvalSub(ciphertext1, ciphertext2)
+  var ciphertextAdd = EvalAdd.EvalAdd(ciphertext1, ciphertext2)
+  console.timeEnd("EnyaFHE: Running Calculation: Adding and Subtracting the two encrypted vectors");
 
   /* Decrypt the ciphertext */
   console.time("EnyaFHE: Decrypting the result");
   
-  var text = EnyaFHE.DecryptVector(
-      EnyaFHE.ReadCiphertext(ciphertext)
+  var resultArraySub = EnyaFHE.DecryptVector(
+      EnyaFHE.ReadCiphertext(ciphertextSub)
+  );
+  var resultArrayAdd = EnyaFHE.DecryptVector(
+      EnyaFHE.ReadCiphertext(ciphertextAdd)
   );
   console.timeEnd("EnyaFHE: Decrypting the result");
 
-  console.log("Result: - should be [7, 3030, 300]: [",text[0],",",text[1],",",text[2],"]");
+  console.log("Result Sub correct: [7, 3030, 300]");
+  console.log("Result Sub actual :",resultArraySub.slice(0,3));
+  console.log("Result Add correct: [-3, -2970, -100]");
+  console.log("Result Add actual :",resultArrayAdd.slice(0,3));
 }
 
 Test()
