@@ -1,6 +1,6 @@
 {
   "name": "enyafhe",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Fully Homomorphic Encryption",
   "main": "index.js",
   "private": true,
@@ -32,12 +32,11 @@
     "eslint-json": "^2.0.0",
     "eslint-tap": "^2.0.1",
     "grunt": "^1.3.0",
-    "grunt-contrib-uglify": "^5.0.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-eslint": "^23.0.0"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=15"
   },
   "keywords": [
     "FHE",

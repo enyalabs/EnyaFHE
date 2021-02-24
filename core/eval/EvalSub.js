@@ -7,10 +7,9 @@ var CRT = require("../math/CRT");
 
 exports.EvalSub = function (ciphertext1, ciphertext2) {
     /* Read in values */
+
     ciphertext1 = FHEMath.vectortoBigNumber(ciphertext1);
-    ciphertext2 = FHEMath.vectortoBigNumber(ciphertext2);   
-    
-    // console.log(ciphertext2.length);
+    ciphertext2 = FHEMath.vectortoBigNumber(ciphertext2);
 
     var res = new Array(ciphertext1.length);
     for (var i = 0; i < ciphertext1.length; i++){
