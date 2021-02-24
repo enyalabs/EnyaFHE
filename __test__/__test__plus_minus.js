@@ -20,7 +20,7 @@ function Test() {
 
   /* Pack the weight */
   console.time("EnyaFHE: Encrypting two vectors");
-  var weights1 = [2, 30, 100];;
+  var weights1 = [2, 30, 100];
   var ptxt1 = EnyaFHE.PackVector(weights1);
   
   /* Encrypt the plaintext */

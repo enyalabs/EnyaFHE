@@ -20,10 +20,10 @@ console.timeEnd("EnyaFHE: key generation");
 
 /* Specify a number with a decimal point, in this case, 17.1 */
 console.time("EnyaFHE: Encrypt a float");
-var weights = ['170.1'];
+var weights = [170.5];
 var ptxt = EnyaFHE.PackVector(weights);
 
-console.log("EnyaFHE: cleartext:", ptxt);
+// console.log("EnyaFHE: cleartext:", ptxt);
 
 /* Encrypt the plaintext */
 var ciphertext = EnyaFHE.EncryptVector(

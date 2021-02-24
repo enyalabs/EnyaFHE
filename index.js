@@ -1,9 +1,9 @@
-var KeyGen  = require("./dist/encryption/KeyGen");
-var Encrypt = require("./dist/encryption/Encrypt");
-var Decrypt = require("./dist/encryption/Decrypt");
-var APICall = require("./dist/requests/API");
-var FHEMath = require("./dist/math/FHEMath");
-var EvalSub = require("./dist/eval/EvalSub");
+var KeyGen  = require("./core/encryption/KeyGen");
+var Encrypt = require("./core/encryption/Encrypt");
+var Decrypt = require("./core/encryption/Decrypt");
+var APICall = require("./core/requests/API");
+var FHEMath = require("./core/math/FHEMath");
+var EvalSub = require("./core/eval/EvalSub");
 
 class EnyaFHE {
     /**
@@ -92,7 +92,7 @@ class EnyaFHE {
      * rotation key
      */
     RotaKeyGen(privatekey = this.privatekey) {
-        if (typeof privatekey === 'undefined') {
+        if (typeof privatekey === "undefined") {
             throw new Error("EnyaFHE: No private key found.");
         }
         return KeyGen.RotaKey(privatekey);
@@ -118,7 +118,7 @@ class EnyaFHE {
      * private key
      */
     async PublicKeyGenRN(privatekey = this.privatekey) {
-        if (typeof privatekey === 'undefined') {
+        if (typeof privatekey === "undefined") {
             throw new Error("EnyaFHE: No private key found.");
         }
         return await KeyGen.PublicKeyRN(privatekey);
@@ -133,7 +133,7 @@ class EnyaFHE {
      * multiplication key
      */
     async MultiKeyGenRN(privatekey = this.privatekey) {
-        if (typeof privatekey === 'undefined') {
+        if (typeof privatekey === "undefined") {
             throw new Error("EnyaFHE: No private key found.");
         }
         return await KeyGen.MultKeyRN(privatekey);
@@ -213,7 +213,7 @@ class EnyaFHE {
      * @returns {Array} result
      */
     DecryptVector(ciphertext, privatekey = this.privatekey) {
-        if (typeof privatekey === 'undefined') {
+        if (typeof privatekey === "undefined") {
             throw new Error("EnyaFHE: No private key found.");
         }
         return Decrypt.DecryptVector(ciphertext, privatekey);

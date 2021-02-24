@@ -42,17 +42,22 @@ class Encrypt {
      * @returns {[String,..]}
      */
     VectorPacked(vector) {
-        
+        var vectorInt = vector.reduce((acc, cur) => {
+            let curInt = bignum(cur).times(bignum(Math.pow(10, 4))).toNumber();
+            acc.push(parseInt(curInt));
+            return acc;
+        }, []);
+
         var m_toCRT = this.Params()[0];
 
-        while (vector.length < src.cycleorder / 2) {
-            vector.push(0);
+        while (vectorInt.length < src.cycleorder / 2) {
+            vectorInt.push(0);
         }
 
         var permutation = new Array(src.cycleorder / 2).fill(0);
 
         for (var i = 0; i < src.cycleorder / 2; i++) {
-            permutation[i] = bignum(vector[m_toCRT[i]].toString());
+            permutation[i] = bignum(vectorInt[m_toCRT[i]].toString());
         }
 
         var res = this.SpecialCRT(permutation);

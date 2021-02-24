@@ -210,6 +210,11 @@ class Decrypt {
             }
         }
 
+        res = res.reduce((acc, cur) => {
+            acc.push(bignum(cur).div(bignum(bignum(Math.pow(10, 4)))).toNumber());
+            return acc;
+        }, []);
+
         return res;
     }
 }
