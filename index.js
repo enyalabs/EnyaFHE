@@ -1,9 +1,9 @@
-var KeyGen  = require("./dist/encryption/KeyGen");
-var Encrypt = require("./dist/encryption/Encrypt");
-var Decrypt = require("./dist/encryption/Decrypt");
-var APICall = require("./dist/requests/API");
-var FHEMath = require("./dist/math/FHEMath");
-var EvalSub = require("./dist/eval/EvalSub");
+var KeyGen  = require("./core/encryption/KeyGen");
+var Encrypt = require("./core/encryption/Encrypt");
+var Decrypt = require("./core/encryption/Decrypt");
+var APICall = require("./core/requests/API");
+var FHEMath = require("./core/math/FHEMath");
+var EvalSub = require("./core/eval/EvalSub");
 
 class EnyaFHE {
     /**
