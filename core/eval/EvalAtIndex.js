@@ -1,7 +1,7 @@
 var bignum = require("bignumber.js");
 
 var FHEMath = require("../math/FHEMath");
-var src = require("../src/src");
+var src = require("../math/src");
 var CRT = require("../math/CRT");
 
 /**

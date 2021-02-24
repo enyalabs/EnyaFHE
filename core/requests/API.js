@@ -1,5 +1,5 @@
 var fetch = require("node-fetch");
-var src = require("../src/src");
+var src = require("../math/src");
 
 class apicall {
     constructor() {

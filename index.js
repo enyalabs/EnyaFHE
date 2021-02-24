@@ -331,7 +331,7 @@ class EnyaFHE {
      * @param {Array} weights
      */
     async FHE(weights) {
-        /* Token and AlgorithnName checking */
+        /* Token and AlgorithmName checking */
         if (this.token == undefined) {
             throw new Error("EnyaFHE: Token does not exist!");
         }

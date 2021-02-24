@@ -4,7 +4,7 @@ var seedrandom = require("seedrandom");
 var bignum = require("bignumber.js");
 bignum.config({ ROUNDING_MODE: 1 }); 
 
-var src = require("../src/src");
+var src = require("./src");
 
  class FHEMath{
     constructor() {

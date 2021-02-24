@@ -2,7 +2,7 @@ var bignum = require("bignumber.js");
 var nextFrame = require("next-frame");
 
 var FHEMath = require("../math/FHEMath");
-var src = require("../src/src");
+var src = require("../math/src");
 var CRT = require("../math/CRT");
 
 exports.EvalAdd = function (ciphertext1, ciphertext2) {

@@ -1,7 +1,7 @@
 var bignum = require("bignumber.js");
 
 var FHEMath = require("../math/FHEMath");
-var src = require("../src/src");
+var src = require("../math/src");
 var CRT = require("../math/CRT");
 
 /**
@@ -491,7 +491,8 @@ const ExpandCRT = function(element) {
  * @param {[[bignum(),..], [bignum(),..],...]} ciphertext1
  * @param {[[bignum()...], [bignum(),..],...]} ciphertext2
  */
-exports.EvalMulti = function(ciphertext1, ciphertext2, multikey) {
+exports.EvalMul = function(ciphertext1, ciphertext2, multikey) {
+
     var part1 = new Array(2);
     var part2 = new Array(2);
 
